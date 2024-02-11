@@ -4,7 +4,7 @@ import { type ProductItemType } from "@/ui/types";
 const products: ProductItemType[] = [
 	{
 		id: "1",
-		name: "Wazon",
+		name: "Vase",
 		category: "Home",
 		price: 8999,
 		coverImage: {
@@ -14,7 +14,7 @@ const products: ProductItemType[] = [
 	},
 	{
 		id: "2",
-		name: "Lampa",
+		name: "Lamp",
 		category: "Home",
 		price: 15490,
 		coverImage: {
@@ -24,7 +24,7 @@ const products: ProductItemType[] = [
 	},
 	{
 		id: "3",
-		name: "Kubek",
+		name: "Mug",
 		category: "Home",
 		price: 1590,
 		coverImage: {
@@ -34,7 +34,7 @@ const products: ProductItemType[] = [
 	},
 	{
 		id: "4",
-		name: "Miseczki",
+		name: "Ceramics",
 		category: "Home",
 		price: 4590,
 		coverImage: {
@@ -46,7 +46,7 @@ const products: ProductItemType[] = [
 
 export default function Home() {
 	return (
-		<section className="lfg:max-w-7xl mx-auto max-w-2xl px-8 py-12 sm:px-6 sm:py-16 md:max-w-4xl">
+		<section className="mx-auto max-w-2xl px-8 py-12 sm:px-6 sm:py-16 md:max-w-4xl lg:max-w-7xl">
 			<ProductList products={products} />
 		</section>
 	);
