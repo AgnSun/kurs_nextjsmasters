@@ -36,9 +36,10 @@ export default async function SingleProductPage({ params }: { params: { productI
 		<>
 			<article className="max-w-xs">
 				<ProductCoverImage {...product.coverImage} />
+				<h1 className="text-sm font-semibold text-gray-700">{product.name}</h1>
 				<ProductListItemDescription product={product} />
 			</article>
-			<aside>
+			<aside className="mt-5">
 				<Suspense fallback={"Ładowanie..."}>
 					<SuggestedProductsList />
 				</Suspense>
