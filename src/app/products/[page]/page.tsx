@@ -10,7 +10,7 @@ export default async function ProductsPage({ params }: { params: { page: number 
 	const totalPages = Math.ceil(allProducts / productsPerPage);
 
 	if (!params.page || isNaN(Number(params.page)) || Number(params.page) <= 0) {
-		return redirect("/products/1");
+		return redirect("/products");
 	}
 
 	return (
