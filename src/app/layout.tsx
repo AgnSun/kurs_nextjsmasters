@@ -26,7 +26,7 @@ export default function RootLayout({
 							</ActiveLink>
 						</li>
 						<li>
-							<ActiveLink href="/products" activeClassName="text-pink-400 underline" match>
+							<ActiveLink href="/products" activeClassName="text-pink-400 underline" match={false}>
 								All
 							</ActiveLink>
 						</li>
