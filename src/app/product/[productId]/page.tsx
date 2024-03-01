@@ -35,8 +35,8 @@ export default async function SingleProductPage({ params }: { params: { productI
 	return (
 		<>
 			<article className="max-w-xs">
-				<ProductCoverImage {...product.coverImage} />
 				<h1 className="text-sm font-semibold text-gray-700">{product.name}</h1>
+				<ProductCoverImage {...product.coverImage} />
 				<ProductListItemDescription product={product} />
 				<p className="text-sm font-medium text-gray-500">{product.description}</p>
 			</article>
