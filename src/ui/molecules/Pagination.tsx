@@ -9,7 +9,11 @@ export const Pagination = ({ totalPages }: { totalPages: number }) => {
 				{pages.map((page) => {
 					return (
 						<li key={page}>
-							<ActiveLink href={`/products/${page}`} activeClassName="underline" match>
+							<ActiveLink
+								href={`/products/${page}`}
+								activeClassName="text-pink-700 underline"
+								match
+							>
 								{page}
 							</ActiveLink>
 						</li>
