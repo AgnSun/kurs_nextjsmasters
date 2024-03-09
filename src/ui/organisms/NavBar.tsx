@@ -11,7 +11,7 @@ const navLinks = [
 	{ href: "/categories/accessories", label: "Accessories", match: false },
 	{ href: "/collections", label: "Collections", match: false },
 	{ href: "/categories", label: "Categories", match: false },
-];
+
 
 export async function NavBar() {
 	return (

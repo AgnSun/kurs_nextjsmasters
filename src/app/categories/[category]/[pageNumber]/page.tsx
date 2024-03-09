@@ -4,6 +4,7 @@ import { ProductsGetByCategoryDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
 import { PaginationForCategory } from "@/ui/molecules/PaginationForCategory";
 
+
 export const generateStaticParams = async ({ params }: { params: { category: string } }) => {
 	if (params.category === "t-shirts") {
 		return [{ pageNumber: "1" }, { pageNumber: "2" }];

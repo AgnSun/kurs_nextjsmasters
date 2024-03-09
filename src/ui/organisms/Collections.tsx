@@ -2,10 +2,11 @@ import React from "react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 const collectionLinks = [
+
 	{ href: "/collections/summer-vibes", label: "Summer vibes", match: false },
 	{ href: "/collections/new-arrivals", label: "New arrivals", match: false },
 	{ href: "/collections/elegant-extras", label: "Elegant extras", match: false },
-];
+
 
 export async function Collections() {
 	return (
