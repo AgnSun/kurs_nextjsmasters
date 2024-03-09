@@ -1,14 +1,10 @@
-import { type Metadata } from "next";
 import { notFound } from "next/navigation";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetByCollectionDocument } from "@/gql/graphql";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { Collections } from "@/ui/organisms/Collections";
 
-export const generateMetadata = async ({
-	params,
-}: {
-	params: { collection: string };
-}): Promise<Metadata> => {
+export const generateMetadata = ({ params }: { params: { collection: string } }) => {
 	const name = params.collection;
 	const words = name.split("-");
 	const correctedName = words
@@ -34,16 +30,10 @@ export default async function ProductCollectionsPage({
 		notFound();
 	}
 
-	// const name = params.collection;
-	// const words = name.split("-");
-	// const correctedName = words
-	// 	.map((word, index) => (index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
-	// 	.join(" ");
-
 	return (
 		<>
 			<div>
-				{/* <h2>{correctedName}</h2> */}
+				<Collections />
 				<ProductList products={products} />
 			</div>
 		</>
