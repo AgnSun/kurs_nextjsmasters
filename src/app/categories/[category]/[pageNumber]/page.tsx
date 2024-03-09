@@ -2,6 +2,7 @@ import { notFound } from "next/navigation";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { ProductsGetByCategoryDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
+import { PaginationForCategory } from "@/ui/molecules/PaginationForCategory";
 
 export const generateStaticParams = async ({ params }: { params: { category: string } }) => {
 	if (params.category === "t-shirts") {
@@ -28,6 +29,7 @@ export default async function ProductsCategoryPage({
 
 	return (
 		<div>
+			<PaginationForCategory category={params.category} totalPages={1} />
 			<ProductList products={products} />
 		</div>
 	);
