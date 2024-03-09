@@ -29,11 +29,17 @@ export default async function ProductCollectionsPage({
 	if (!products) {
 		notFound();
 	}
+	const name = params.collection;
+	const words = name.split("-");
+	const correctedName = words
+		.map((word, index) => (index === 0 ? word.charAt(0).toUpperCase() + word.slice(1) : word))
+		.join(" ");
 
 	return (
 		<>
 			<div>
 				<Collections />
+				<h1>{correctedName}</h1>
 				<ProductList products={products} />
 			</div>
 		</>
