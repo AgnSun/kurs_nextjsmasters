@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import { type Metadata } from "next";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { ProductsGetByCategoryDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
@@ -10,6 +11,16 @@ export const generateStaticParams = async ({ params }: { params: { category: str
 	} else {
 		return [{ pageNumber: "1" }];
 	}
+};
+
+export const generateMetadata = async ({
+	params,
+}: {
+	params: { category: string; pageNumber: string };
+}): Promise<Metadata> => {
+	return {
+		title: `${params.category}`,
+	};
 };
 
 export default async function ProductsCategoryPage({
