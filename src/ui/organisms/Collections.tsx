@@ -2,10 +2,11 @@ import React from "react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
 const collectionLinks = [
-	{ href: "/collections/summer-vibes", label: "Summer vibes", match: true },
-	{ href: "/collections/new-arrivals", label: "New arrivals", match: true },
-	{ href: "/collections/elegant-extras", label: "Elegant extras", match: true },
-];
+
+	{ href: "/collections/summer-vibes", label: "Summer vibes", match: false },
+	{ href: "/collections/new-arrivals", label: "New arrivals", match: false },
+	{ href: "/collections/elegant-extras", label: "Elegant extras", match: false },
+
 
 export async function Collections() {
 	return (
@@ -18,7 +19,7 @@ export async function Collections() {
 							activeClassName="text-pink-400 underline"
 							match={link.match}
 						>
-							{link.label}
+							<h2>{link.label}</h2>
 						</ActiveLink>
 					</li>
 				))}
