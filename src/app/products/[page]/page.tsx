@@ -1,5 +1,4 @@
 import { redirect } from "next/navigation";
-// import { getProductsByPage } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
 import { getProductsByPage, getProductsList } from "@/api/products";

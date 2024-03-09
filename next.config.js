@@ -13,7 +13,7 @@ const nextConfig = {
 			},
 			{
 				source: "/collections",
-				destination: "/collections/t-shirts",
+				destination: "/collections/summer-vibes",
 				permanent: false,
 			},
 			{

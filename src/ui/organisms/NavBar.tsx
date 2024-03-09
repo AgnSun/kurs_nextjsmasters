@@ -1,6 +1,7 @@
-import React from "react";
+import React, { Suspense } from "react";
 import { ShoppingCart } from "lucide-react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
+import { SearchBox } from "@/ui/molecules/SearchBox";
 
 const navLinks = [
 	{ href: "/", label: "Home", match: true },
@@ -30,7 +31,11 @@ export async function NavBar() {
 						</li>
 					))}
 				</ul>
+
 				<div className="flex flex-1 flex-col gap-x-2 pb-4 lg:flex-row lg:items-center lg:pb-0">
+					<Suspense>
+						<SearchBox />
+					</Suspense>
 					<ShoppingCart />
 					<span className="font-bold text-pink-400">0</span>
 				</div>
