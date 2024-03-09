@@ -1,13 +1,15 @@
 import { redirect } from "next/navigation";
-import { getProductsByPage } from "@/api/products";
+// import { getProductsByPage } from "@/api/products";
 import { Pagination } from "@/ui/molecules/Pagination";
 import { ProductList } from "@/ui/organisms/ProductList";
+import { getProductsByPage, getProductsList } from "@/api/products";
 
 export default async function ProductsPage({ params }: { params: { page: number } }) {
+	const allProducts = await getProductsList();
+	const allProductsNumber = allProducts.length;
+	const productsPerPage = 4;
+	const totalPages = Math.ceil(allProductsNumber / productsPerPage);
 	const products = await getProductsByPage(params.page);
-	const allProducts = 100;
-	const productsPerPage = 20;
-	const totalPages = Math.ceil(allProducts / productsPerPage);
 
 	if (!params.page || isNaN(Number(params.page)) || Number(params.page) <= 0) {
 		return redirect("/products");
@@ -16,7 +18,7 @@ export default async function ProductsPage({ params }: { params: { page: number 
 	return (
 		<div>
 			<Pagination totalPages={totalPages} />
-			<ProductList products={products} />;
+			<ProductList products={products} />
 		</div>
 	);
 }
