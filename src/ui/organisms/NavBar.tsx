@@ -6,11 +6,11 @@ import { SearchBox } from "@/ui/molecules/SearchBox";
 const navLinks = [
 	{ href: "/", label: "Home", match: true },
 	{ href: "/products", label: "All", match: false },
-	{ href: "/categories", label: "Categories", match: false },
-	{ href: "/categories/t-shirts", label: "T-shirts", match: true },
-	{ href: "/categories/hoodies", label: "Hoodies", match: true },
-	{ href: "/categories/accessories", label: "Accessories", match: true },
+	{ href: "/categories/t-shirts", label: "T-shirts", match: false },
+	{ href: "/categories/hoodies", label: "Hoodies", match: false },
+	{ href: "/categories/accessories", label: "Accessories", match: false },
 	{ href: "/collections", label: "Collections", match: false },
+	{ href: "/categories", label: "Categories", match: false },
 ];
 
 export async function NavBar() {
@@ -23,7 +23,7 @@ export async function NavBar() {
 						<li key={link.label}>
 							<ActiveLink
 								href={link.href}
-								activeClassName="text-pink-400 underline border-b border-blue-500"
+								activeClassName="text-pink-400 underline border-b border-blue-500  bg-green-500"
 								match={link.match}
 							>
 								{link.label}
