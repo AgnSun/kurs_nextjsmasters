@@ -18,7 +18,7 @@ export async function Collections() {
 							activeClassName="text-pink-400 underline"
 							match={link.match}
 						>
-							<h2>{link.label}</h2>
+							<p>{link.label}</p>
 						</ActiveLink>
 					</li>
 				))}
