@@ -11,11 +11,13 @@ export const ActiveLink = ({
 	children,
 	activeClassName,
 	match,
+	prefetch,
 }: {
 	href: string;
 	children: ReactNode;
 	activeClassName: ClassValue;
 	match: boolean;
+	prefetch?: boolean;
 }) => {
 	const pathname = usePathname();
 	const isActive = match ? pathname === href : pathname.startsWith(href);
@@ -25,6 +27,7 @@ export const ActiveLink = ({
 			href={href as Route}
 			className={clsx("text-blue-400 hover:text-blue-600", isActive && activeClassName)}
 			aria-current={isActive ? "page" : undefined}
+			prefetch={prefetch}
 		>
 			{children}
 		</Link>

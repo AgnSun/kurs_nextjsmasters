@@ -1,51 +1,27 @@
-import { type ProductItemType } from "@/ui/types";
-
-type ProductResponseItem = {
-	id: string;
-	title: string;
-	price: number;
-	description: string;
-	category: string;
-	rating: {
-		rate: number;
-		count: number;
-	};
-	image: string;
-	longDescription: string;
-};
+import { ProductGetByPageDocument, ProductsGetListDocument } from "@/gql/graphql";
+import { executeGraphql } from "@/api/graphqlApi";
 
 export const getProductsList = async () => {
-	const res = await fetch("https://naszsklep-api.vercel.app/api/products?take=20");
-	const productsResponse = (await res.json()) as ProductResponseItem[];
-	const products = productsResponse.map(productResponseItemToProductItemType);
-	return products;
+	const graphqlResponse = await executeGraphql(ProductsGetListDocument);
+	return graphqlResponse.products.data;
 };
 
-export const getProductById = async (id: ProductResponseItem["id"]) => {
-	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
-	const productResponse = (await res.json()) as ProductResponseItem;
-	return productResponseItemToProductItemType(productResponse);
-};
+// export const getProductById = async (_id: ProductListItemFragmentFragment["id"]) => {
+// 	const graphqlResponse = await executeGraphql(ProductGetByIdDocument, { id: _id });
+// 	return graphqlResponse.product;
+// };
+
+// export const getProductById = async (id: ProductResponseItem["id"]) => {
+// 	const res = await fetch(`https://naszsklep-api.vercel.app/api/products/${id}`);
+// 	const productResponse = (await res.json()) as ProductResponseItem;
+// 	return productResponseItemToProductItemType(productResponse);
+// };
 
 export const getProductsByPage = async (page: number) => {
-	const productsPerPage = 20;
-	const offset = (page - 1) * productsPerPage;
-	const res = await fetch(`https://naszsklep-api.vercel.app/api/products?take=20&offset=${offset}`);
-	const productsResponse = (await res.json()) as ProductResponseItem[];
-	const products = productsResponse.map(productResponseItemToProductItemType);
-	return products;
-};
+	const productsPerPage = 4;
+	const skipMultiplier = page === 1 ? 0 : page - 1;
+	const skip = skipMultiplier > 0 ? productsPerPage * skipMultiplier : 0;
 
-const productResponseItemToProductItemType = (product: ProductResponseItem): ProductItemType => {
-	return {
-		id: product.id,
-		name: product.title,
-		category: product.category,
-		price: product.price,
-		coverImage: {
-			alt: product.title,
-			src: product.image,
-		},
-		description: product.description,
-	};
+	const graphqlResponse = await executeGraphql(ProductGetByPageDocument, { skip: skip });
+	return graphqlResponse.products.data;
 };

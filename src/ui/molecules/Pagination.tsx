@@ -13,6 +13,7 @@ export const Pagination = ({ totalPages }: { totalPages: number }) => {
 								href={`/products/${page}`}
 								activeClassName="text-pink-700 underline"
 								match
+								prefetch={true}
 							>
 								{page}
 							</ActiveLink>
