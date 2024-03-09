@@ -59,7 +59,7 @@ export default async function SingleProductPage({ params }: { params: { productI
 					</div>
 				</div>
 			</article>
-			<aside className="mt-10">
+			<aside data-testid="related-products" className="mt-10">
 				<Suspense fallback={"Ładowanie..."}>
 					<SuggestedProductsList />
 				</Suspense>
