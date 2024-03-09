@@ -29,7 +29,7 @@ export default async function ProductsCategoryPage({
 
 	return (
 		<div>
-			<h1>{params.category}</h1>
+			<h2>{params.category}</h2>
 			<PaginationForCategory category={params.category} totalPages={1} />
 			<ProductList products={products} />
 		</div>

@@ -2,7 +2,6 @@ import { notFound } from "next/navigation";
 import { executeGraphql } from "@/api/graphqlApi";
 import { ProductsGetByCollectionDocument } from "@/gql/graphql";
 import { ProductList } from "@/ui/organisms/ProductList";
-import { Collections } from "@/ui/organisms/Collections";
 
 export default async function ProductCollectionsPage({
 	params,
@@ -28,8 +27,7 @@ export default async function ProductCollectionsPage({
 	return (
 		<>
 			<div>
-				<Collections />
-				<h1>{correctedName}</h1>
+				<h2>{correctedName}</h2>
 				<ProductList products={products} />
 			</div>
 		</>

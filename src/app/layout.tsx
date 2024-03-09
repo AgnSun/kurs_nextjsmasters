@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 
 import { NavBar } from "@/ui/organisms/NavBar";
-// import { Collections } from "@/ui/organisms/Collections";
+import { Collections } from "@/ui/organisms/Collections";
 // import { Pagination } from "@/ui/organisms/Pagination";
 
 const inter = Inter({ subsets: ["latin"] });
@@ -25,9 +25,9 @@ export default function RootLayout({
 						<NavBar />
 					</div>
 				</header>
-				{/* <div>
+				<div>
 					<Collections />
-				</div> */}
+				</div>
 				<section className="mx-auto max-w-2xl px-10 py-12 sm:px-6 sm:py-16 md:max-w-4xl lg:max-w-7xl">
 					{children}
 				</section>
