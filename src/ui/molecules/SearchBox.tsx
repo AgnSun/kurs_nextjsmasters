@@ -8,7 +8,6 @@ export function SearchBox() {
 	const router = useRouter();
 
 	const handleSearch = useDebouncedCallback((term: string) => {
-		console.log(`Searching... ${term}`);
 		let queryString = "";
 		if (term) {
 			queryString = `${encodeURIComponent(term)}`;
