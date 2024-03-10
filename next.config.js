@@ -4,6 +4,9 @@ const nextConfig = {
 		typedRoutes: true,
 		mdxRs: true,
 	},
+	images: {
+		domains: ["static-ourstore.hyperfunctor.com"],
+	},
 	async redirects() {
 		return [
 			{
