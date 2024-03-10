@@ -1,14 +1,17 @@
 "use client";
 import React from "react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type Route } from "next";
 import { useDebouncedCallback } from "use-debounce";
 
 export function SearchBox() {
 	const searchParams = useSearchParams();
 	const router = useRouter();
+	const pathname = usePathname();
 
-	// function handleSearch(term: string) {
+	// const handleSearch = useDebouncedCallback((term: string) => {
+	// 	console.log(`Searching... ${term}`);
+
 	// 	const params = new URLSearchParams(searchParams);
 	// 	if (term) {
 	// 		params.set("query", term);
@@ -16,18 +19,27 @@ export function SearchBox() {
 	// 		params.delete("query");
 	// 	}
 	// 	router.push(`search?${params.toString()}` as Route);
+	// }, 500);
+
+	// function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+	// 	if (event.key === "Enter") {
+	// 		if (!(event.target as HTMLInputElement).value.trim()) {
+	// 			event.preventDefault();
+	// 		}
+	// 	}
 	// }
 
 	const handleSearch = useDebouncedCallback((term: string) => {
 		console.log(`Searching... ${term}`);
 
-		const params = new URLSearchParams(searchParams);
+		let queryString = "";
 		if (term) {
-			params.set("query", term);
-		} else {
-			params.delete("query");
+			queryString = `query=${encodeURIComponent(term)}`;
 		}
-		router.push(`search?${params.toString()}` as Route);
+		const newRoute = term ? `search?${queryString}` : pathname;
+
+		router.replace(newRoute as Route);
+		console.log(newRoute);
 	}, 500);
 
 	function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
