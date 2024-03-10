@@ -12,10 +12,7 @@ export const ProductListItemDescription = ({
 		<>
 			<div className="mt-2 flex justify-between">
 				<div>
-					<h2 className="text-lg font-medium text-gray-900">
-						<span className="sr-only">Nazwa: </span>
-						{name}
-					</h2>
+					<h2 className="text-lg font-medium text-gray-900">{name}</h2>
 				</div>
 				<p className="text-lg font-bold  text-gray-900">
 					<span className="sr-only">Cena: </span>
