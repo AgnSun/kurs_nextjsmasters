@@ -53,7 +53,7 @@ export default async function SingleProductPage({ params }: { params: { productI
 						{product.images[0] && <ProductCoverImage src={product.images[0].url} alt="" />}
 					</div>
 					<div className="gap-6">
-						<h1 className="text-3xl font-bold text-gray-950">{product.name}</h1>
+						{/* <h1 className="text-3xl font-bold text-gray-950">{product.name}</h1> */}
 						<ProductListItemDescription product={product} />
 						<p className="text-lg font-medium text-gray-700">{product.description}</p>
 					</div>
