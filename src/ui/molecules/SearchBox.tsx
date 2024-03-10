@@ -1,54 +1,31 @@
 "use client";
-import React from "react";
-import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { type Route } from "next";
+import React from "react";
+import { useRouter } from "next/navigation";
 import { useDebouncedCallback } from "use-debounce";
 
 export function SearchBox() {
-	const searchParams = useSearchParams();
 	const router = useRouter();
-	const pathname = usePathname();
-
-	// const handleSearch = useDebouncedCallback((term: string) => {
-	// 	console.log(`Searching... ${term}`);
-
-	// 	const params = new URLSearchParams(searchParams);
-	// 	if (term) {
-	// 		params.set("query", term);
-	// 	} else {
-	// 		params.delete("query");
-	// 	}
-	// 	router.push(`search?${params.toString()}` as Route);
-	// }, 500);
-
-	// function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
-	// 	if (event.key === "Enter") {
-	// 		if (!(event.target as HTMLInputElement).value.trim()) {
-	// 			event.preventDefault();
-	// 		}
-	// 	}
-	// }
 
 	const handleSearch = useDebouncedCallback((term: string) => {
 		console.log(`Searching... ${term}`);
-
 		let queryString = "";
 		if (term) {
-			queryString = `query=${encodeURIComponent(term)}`;
+			queryString = `${encodeURIComponent(term)}`;
 		}
-		const newRoute = term ? `search?${queryString}` : pathname;
-
-		router.replace(newRoute as Route);
-		console.log(newRoute);
+		const newRoute = term ? `search?query=${queryString}` : "/";
+		router.push(newRoute as Route);
 	}, 500);
 
-	function handleKeyPress(event: React.KeyboardEvent<HTMLInputElement>) {
+	const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
 		if (event.key === "Enter") {
+			event.preventDefault();
+			handleSearch((event.target as HTMLInputElement).value);
 			if (!(event.target as HTMLInputElement).value.trim()) {
 				event.preventDefault();
 			}
 		}
-	}
+	};
 
 	return (
 		<form>
@@ -63,7 +40,6 @@ export function SearchBox() {
 					e.target.value.length >= 2 && handleSearch(e.target.value);
 				}}
 				onKeyPress={handleKeyPress}
-				defaultValue={searchParams.get("query")?.toString()}
 			/>
 		</form>
 	);
