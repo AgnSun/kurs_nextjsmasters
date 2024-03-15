@@ -20,8 +20,11 @@ export default async function ProductCollectionsPage({
 }: {
 	params: { collection: string };
 }) {
-	const data = await executeGraphql(ProductsGetByCollectionDocument, {
-		slug: params.collection,
+	const data = await executeGraphql({
+		query: ProductsGetByCollectionDocument,
+		variables: {
+			slug: params.collection,
+		},
 	});
 
 	const products = data.collection?.products;

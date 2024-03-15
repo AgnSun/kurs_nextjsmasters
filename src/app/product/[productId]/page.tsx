@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import { revalidateTag } from "next/cache";
 import { notFound } from "next/navigation";
 import { type Metadata } from "next";
 import { ProductCoverImage } from "@/ui/atoms/ProductCoverImage";
@@ -7,6 +8,9 @@ import { SuggestedProductsList } from "@/ui/organisms/SuggestedProducts";
 import { ProductGetByIdDocument } from "@/gql/graphql";
 import { executeGraphql } from "@/api/graphqlApi";
 import { getProductsList } from "@/api/products";
+import { AddToCartButton } from "@/app/product/[productId]/AddToCartButton";
+import { changeItemQuantity } from "@/api/actions";
+import { addProductToCart, getOrCreateCart } from "@/api/cart";
 
 export const generateStaticParams = async () => {
 	const products = await getProductsList();
@@ -20,8 +24,11 @@ export const generateMetadata = async ({
 }: {
 	params: { productId: string };
 }): Promise<Metadata> => {
-	const { product } = await executeGraphql(ProductGetByIdDocument, {
-		id: params.productId,
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: {
+			id: params.productId,
+		},
 	});
 	if (!product) {
 		notFound();
@@ -38,11 +45,27 @@ export const generateMetadata = async ({
 };
 
 export default async function SingleProductPage({ params }: { params: { productId: string } }) {
-	const { product } = await executeGraphql(ProductGetByIdDocument, {
-		id: params.productId,
+	const { product } = await executeGraphql({
+		query: ProductGetByIdDocument,
+		variables: {
+			id: params.productId,
+		},
 	});
 	if (!product) {
 		notFound();
+	}
+
+	async function addProductToCartAction(_formData: FormData) {
+		"use server";
+		const cart = await getOrCreateCart();
+		await addProductToCart(cart.id, params.productId);
+		const productExistsInCart = cart.items.find((item) => item.product.id === params.productId);
+		if (productExistsInCart) {
+			await changeItemQuantity(cart.id, params.productId, productExistsInCart.quantity + 1);
+		} else {
+			await addProductToCart(cart.id, params.productId);
+		}
+		revalidateTag("cart");
 	}
 
 	return (
@@ -57,6 +80,11 @@ export default async function SingleProductPage({ params }: { params: { productI
 						<ProductListItemDescription product={product} />
 						<p className="text-lg font-medium text-gray-700">{product.description}</p>
 					</div>
+					<div>
+						<form action={addProductToCartAction}>
+							<AddToCartButton data-testid="add-to-cart-button" />
+						</form>
+					</div>
 				</div>
 			</article>
 			<aside data-testid="related-products" className="mt-10">
@@ -64,6 +92,14 @@ export default async function SingleProductPage({ params }: { params: { productI
 					<SuggestedProductsList />
 				</Suspense>
 			</aside>
+			<form data-testid="add-review-form" className="mt-10">
+				Formularz
+				<input name="headline"></input>
+				<input name="content"></input>
+				<input name="rating"></input>
+				<input name="name"></input>
+				<input name="email"></input>
+			</form>
 		</>
 	);
 }

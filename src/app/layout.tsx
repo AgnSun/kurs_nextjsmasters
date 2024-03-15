@@ -22,7 +22,6 @@ export default function RootLayout({
 						<NavBar />
 					</div>
 				</header>
-
 				<section className="mx-auto max-w-2xl px-10 py-12 sm:px-6 sm:py-16 md:max-w-4xl lg:max-w-7xl">
 					{children}
 				</section>

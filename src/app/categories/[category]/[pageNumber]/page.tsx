@@ -23,8 +23,11 @@ export default async function ProductsCategoryPage({
 }: {
 	params: { category: string; pageNumber: string };
 }) {
-	const data = await executeGraphql(ProductsGetByCategoryDocument, {
-		slug: params.category,
+	const data = await executeGraphql({
+		query: ProductsGetByCategoryDocument,
+		variables: {
+			slug: params.category,
+		},
 	});
 
 	const products = data.category?.products;
