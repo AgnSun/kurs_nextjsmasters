@@ -15,11 +15,9 @@ export const ProductListItemDescription = ({
 					<h2 className="text-lg font-medium text-gray-900">{name}</h2>
 				</div>
 				<p data-testid="product-price" className="mr-8 text-lg font-bold  text-gray-900">
-					<span className="sr-only">Cena: </span>
 					{formatMoney(price / 100)}
 				</p>
-				<p className="text-lg font-medium  text-gray-900">
-					<span className="sr-only">Rating: </span>
+				<p data-testid="product-rating" className="text-lg font-medium  text-gray-900">
 					{rating && Number(rating).toFixed(2)}
 				</p>
 			</div>
