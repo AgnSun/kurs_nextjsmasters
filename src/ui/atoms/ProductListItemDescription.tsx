@@ -6,7 +6,7 @@ type ProductListItemDescriptionProps = {
 };
 
 export const ProductListItemDescription = ({
-	product: { name, categories, price },
+	product: { name, categories, price, rating },
 }: ProductListItemDescriptionProps) => {
 	return (
 		<>
@@ -14,9 +14,13 @@ export const ProductListItemDescription = ({
 				<div>
 					<h2 className="text-lg font-medium text-gray-900">{name}</h2>
 				</div>
-				<p className="text-lg font-bold  text-gray-900">
+				<p data-testid="product-price" className="mr-8 text-lg font-bold  text-gray-900">
 					<span className="sr-only">Cena: </span>
 					{formatMoney(price / 100)}
+				</p>
+				<p className="text-lg font-medium  text-gray-900">
+					<span className="sr-only">Rating: </span>
+					{rating && Number(rating).toFixed(2)}
 				</p>
 			</div>
 			<div>

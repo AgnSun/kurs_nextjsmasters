@@ -1,7 +1,11 @@
 import React from "react";
 import { ActiveLink } from "@/ui/atoms/ActiveLink";
 
-export const Pagination = ({ totalPages }: { totalPages: number }) => {
+type PaginationProps = {
+	totalPages: number;
+};
+
+export const Pagination = ({ totalPages }: PaginationProps) => {
 	const pages = Array.from({ length: totalPages }, (_, index) => index + 1);
 	return (
 		<nav>

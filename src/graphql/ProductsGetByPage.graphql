@@ -1,5 +1,5 @@
-query ProductGetByPage($skip: Int) {
-	products(take: 4, skip: $skip) {
+query ProductGetByPage($skip: Int, $order: SortDirection, $orderBy: ProductSortBy) {
+	products(take: 4, skip: $skip, order: $order, orderBy: $orderBy) {
 		data {
 			...ProductListItemFragment
 		}
