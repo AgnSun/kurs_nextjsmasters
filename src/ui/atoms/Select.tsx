@@ -38,6 +38,12 @@ export const Select = () => {
 				<option data-testid="sort-by-price" value="DESC-PRICE">
 					Price high to low
 				</option>
+				<option data-testid="sort-by-rating" value="ASC-RATING">
+					Rating low to high
+				</option>
+				<option data-testid="sort-by-rating" value="DESC-RATING">
+					Rating high to low
+				</option>
 			</select>
 		</div>
 	);
